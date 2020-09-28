@@ -1,0 +1,406 @@
+[
+  {
+    "key":"utilityBill",
+    "description":"Utility Bills Details",
+	"entityClassId": "auditAMLKYC",
+	"riskIndicator": [
+         {
+      		"indicator":"inactive"
+		 },
+		 {
+      	    "indicator":"overdrawn"
+		 },
+		 {
+      	    "indicator":"override" 
+		 },
+		 {
+      	    "indicator":"overdraft" 
+		 }
+	 ],
+	"moreinfo": "memo",
+	"formName": "FORM-A",
+	"Findings": "yes",
+	"editFindings": "yes",
+	"deleteFindings":"yes",
+	"reviewFindings":"yes",			 
+	"checklists":[
+	           {
+			   "checklistId": "not be more than 25 characters",
+			   "checkDescription": "up to 75 characters"
+			   },
+			   {
+			   "checklistId": "not be more than 25 characters",
+			   "checkDescription": "up to 75 characters"
+			   }
+			 ],	
+			 
+    "riskAssessment":[
+                 {
+                  "riskRating": "Low", 
+                  "implications": "Low You don't need any action.",
+                  "riskAction": "memo"
+                 },
+				 {
+                  "riskRating": "Medium",      
+                  "implications": "From Medium field of riskassessment of ic4pro_entityregister",
+                  "riskAction": "memo"
+                 },
+				 {
+                  "riskRating": "High",         
+                  "implications": "High risk needs fast action",
+                  "riskAction": "memo"
+                 }
+				 ],
+	"queryBuilder": "memo",
+    "recordDate":"20200603",
+    "recordTime":"10:30:40",
+    "operator":"adroit", 
+    "operation":"edit",
+    "workstation":"11.20.10.1",
+    "recordCounter":"1"
+    },
+	
+    {
+    "key":"identification",
+    "description":"Evidence of identification",
+	"entityClassId": "auditAMLKYC",
+	"riskIndicator": [
+         {
+      		"indicator":"noIdentification"
+		 },
+		 {
+      	    "indicator":"expiredIdentification"
+		 }
+	 ],
+	"moreinfo": "memo",
+	"formName": "FORM-A",
+	"Findings": "yes",
+	"editFindings": "yes",
+	"deleteFindings":"yes",
+	"reviewFindings":"yes",			 
+	"checklists":[
+	           {
+			   "checklistId": "not be more than 25 characters",
+			   "checkDescription": "up to 75 characters"
+			   },
+			   {
+			   "checklistId":"not be more than 25 characters",
+			   "checkDescription": "up to 75 characters"
+			   }
+			 ],						 
+	"riskAssessment":[
+                 {
+                  "riskRating": "Low",
+                  "implications": "memo",
+                  "riskAction": "memo"
+                 },
+				 { 
+                  "riskRating": "Medium", 
+                  "implications": "memo",
+                  "riskAction": "memo"
+                 },
+				 {
+                  "riskRating": "High", 
+                  "implications": "memo",
+                  "riskAction": "memo"
+                 },	 
+				 ],
+	"queryBuilder": "memo",	
+    "recordDate":"20200603",
+    "recordTime":"10:30:40",
+    "operator":"adroit", 
+    "operation":"edit",
+    "workstation":"11.20.10.1",
+    "recordCounter":"1"
+    },
+	{
+    "key":"referee",
+    "description":"References",
+	"entityClassId": "auditAMLKYC",
+	"riskIndicator": [
+         {
+      		"indicator":"noreferee"
+		 },
+		 { 
+      	    "indicator":"wrongreferee"
+		 },
+		 {
+      	    "indicator":"fakereferee"
+		 }
+	 ],
+	"moreinfo": "memo",
+	"formName": "FORM-A",
+	"Findings": "yes",
+	"editFindings": "yes",
+	"deleteFindings":"yes",
+	"reviewFindings":"yes",		 
+	"checklists":[
+	           {
+			   "checklistId":"not be more than 25 characters",
+			   "checkDescription":"up to 75 characters"
+			   },
+			   {
+			   "checklistId":"not be more than 25 characters",
+			   "checkDescription":"up to 75 characters"
+			   }
+			 ],			 
+    "riskAssessment":[
+                 {
+                  "riskRating": "Low",
+                  "implications": "memo",
+                  "riskAction": "memo"
+                 },
+				 {
+                  "riskRating": "Medium",
+                  "implications": "memo",
+                  "riskAction": "memo"
+                 },
+				 {
+                  "riskRating": "High",
+                  "implications": "memo",
+                  "riskAction": "memo"
+                 },	 
+				 ],
+	"queryBuilder": "memo",
+    "recordDate":"20200603",
+    "recordTime":"10:30:40",
+    "operator":"adroit", 
+    "operation":"edit",
+    "workstation":"11.20.10.1",
+    "recordCounter":"1"
+    },
+	
+	{
+    "key":"newgroup",
+    "description":"New group for Cash & Vault",
+	"entityClassId": "auditcashandvault",
+	"riskIndicator": [
+         {
+      		"indicator":"noreferee" 
+		 },
+		 {
+      	    "indicator":"wrongreferee"  
+		 },
+		 {
+      	    "indicator":"fakereferee" 
+		 }
+	 ],
+	"moreinfo": "memo",
+	"formName": "FORM-B",
+	"Findings": "yes",
+	"editFindings": "yes",
+	"deleteFindings":"yes",
+	"reviewFindings":"yes",			 
+	"checklists":[
+	           {
+			   "checklistId":"not be more than 25 characters",
+			   "checkDescription":"up to 75 characters"
+			   },
+			   {
+			   "checklistId":"not be more than 25 characters",
+			   "checkDescription":"up to 75 characters"
+			   }
+			 ],		 
+    "riskAssessment":[
+                 {
+                  "riskRating": "Low",  
+                  "implications": "memo",
+                  "riskAction": "memo"
+                 },
+				 {
+                  "riskRating": "Medium", 
+                  "implications": "memo",
+                  "riskAction": "memo"
+                 },
+				 {
+                  "riskRating": "High",   
+                  "implications": "memo",
+                  "riskAction": "memo"
+                 },	 
+				 ],
+	"queryBuilder": "memo",
+    "recordDate":"20200603",
+    "recordTime":"10:30:40",
+    "operator":"adroit", 
+    "operation":"edit",
+    "workstation":"11.20.10.1",
+    "recordCounter":"1"
+    },
+
+	{
+    "key":"mematTrueCopy",
+    "description":"Certified True Copy of MEMAT",
+	"entityClassId": "auditAMLKYC",
+	"riskIndicator": [
+         {
+      		"indicator":"wrongcopy"  
+		 },
+		 {
+      	    "indicator":"noMEMAT"     
+		 },
+		 {
+      	    "indicator":"incompleteMEMAT"
+		 }
+		 {
+      	    "indicator":"expiredMEMAT"    
+		 }
+	 ],
+	"moreinfo": "memo",
+	"formName": "FORM-B",
+	"Findings": "yes",
+	"editFindings": "yes",
+	"deleteFindings":"yes",
+	"reviewFindings":"yes",			 
+	"checklists":[
+	           {
+			   "checklistId":"not be more than 25 characters",
+			   "checkDescription":"up to 75 characters"
+			   },
+			   {
+			   "checklistId":"not be more than 25 characters",
+			   "checkDescription":"up to 75 characters"
+			   }
+			 ],		
+    "riskAssessment":[
+                 { 
+                  "riskRating": "Low",         
+                  "implications": "memo",
+                  "riskAction": "memo"
+                 },
+				 {
+                  "riskRating": "Medium",                
+                  "implications": "memo",
+                  "riskAction": "memo"
+                 },
+				 {
+                  "riskRating": "High",     
+                  "implications": "memo",
+                  "riskAction": "memo"
+                 },	 
+				 ],
+	"queryBuilder": "memo",
+    "recordDate":"20200603",
+    "recordTime":"10:30:40",
+    "operator":"adroit", 
+    "operation":"edit",
+    "workstation":"11.20.10.1",
+    "recordCounter":"1"
+    },
+	
+	{
+    "key":"customerService",
+    "description":"Customer Service Part One",
+	"entityClassId": "auditcustomerservice",
+	"riskIndicator": [
+         {
+      		"indicator":"poorservice" 
+		 },
+		 {
+      	    "indicator":"underagecustomer"   
+		 },
+		 {
+      	    "indicator":"illegalcustomer"      
+		 }
+	 ],
+	"moreinfo": "memo",
+	"formName": "FORM-B",
+	"Findings": "yes",
+	"editFindings": "yes",
+	"deleteFindings":"yes",
+	"reviewFindings":"yes",				 
+	"checklists":[
+	           {
+			   "checklistId":"not be more than 25 characters",
+			   "checkDescription": "up to 75 characters"
+			   },
+			   {
+			   "checklistId":"not be more than 25 characters",
+			   "checkDescription":"up to 75 characters"
+			   }
+			 ],			 
+    "riskAssessment":[
+                 {
+                  "riskRating": "Low",                    
+                  "implications": "memo",
+                  "riskAction": "memo"
+                 },
+				 {
+                  "riskRating": "Medium",                
+                  "implications": "memo",
+                  "riskAction": "memo"
+                 },
+				 {
+                  "riskRating": "High",                 
+                  "implications": "memo",
+                  "riskAction": "memo"
+                 },	 
+				 ],
+	"queryBuilder": "memo",
+    "recordDate":"20200603",
+    "recordTime":"10:30:40",
+    "operator":"adroit", 
+    "operation":"edit",
+    "workstation":"11.20.10.1",
+    "recordCounter":"1"
+    },
+   	{
+    "key":"specSignatureCard",
+    "description":"Specimen Signature Card",
+	"entityClassId": "auditAMLKYC",
+	"riskIndicator": [
+         {
+      		"indicator":"wrongsignature"               
+		 },
+		 {
+      	    "indicator":"nosignature"                  
+		 },
+		 {
+      	    "indicator":"invalidcard"                   
+		 }
+		 {
+      	    "indicator":"cardmissing"                  
+		 }
+	 ],
+	"moreinfo": "memo",
+	"formName": "FORM-B",
+	"Findings": "yes",
+	"editFindings": "yes",
+	"deleteFindings":"yes",
+	"reviewFindings":"yes",				 
+	"checklists":[
+	           {
+			   "checklistId": "not be more than 25 characters",
+			   "checkDescription":"up to 75 characters"
+			   },
+			   {
+			   "checklistId":"not be more than 25 characters",
+			   "checkDescription":"up to 75 characters"
+			   }
+			 ],	
+    "riskAssessment":[
+                 {
+                  "riskRating": "Low",    
+                  "implications": "memo",
+                  "riskAction": "memo"
+                 },
+				 {
+                  "riskRating": "Medium",      
+                  "implications": "memo",
+                  "riskAction": "memo"
+                 },
+				 {
+                  "riskRating": "High",              
+                  "implications": "memo",
+                  "riskAction": "memo"
+                 },	 
+				 ],	 
+	"queryBuilder": "memo",
+    "recordDate":"20200603",
+    "recordTime":"10:30:40",
+    "operator":"adroit", 
+    "operation":"edit",
+    "workstation":"11.20.10.1",
+    "recordCounter":"1"
+    },
+]
+	
