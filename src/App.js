@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
-import dataJson from './ic4pro_findings.json'
+import dataJson from './Components/Data/Dummy/ic4pro_findings.json'
 import Iterator from './Components/Iterator'
 import DescriptiveFindings from './Components/DescriptiveFindings/DescriptiveFindings';
+import FindingIdTime from './Components/Date/FindingIdTime';
 
 function App() {
 
@@ -72,17 +73,7 @@ function App() {
   }
 
 
-  const pepe = () => {let Fecha = new Date()
-    let año = Fecha.getFullYear()
-    let mes = Fecha.getMonth() + 1
-    let dia = Fecha.getDay()
-    let hora = Fecha.getHours()
-    let min = Fecha.getMinutes()
-    let seg = Fecha.getSeconds()
-
-  return <p>{año}{("0"+mes).slice(-2)}{("0"+dia).slice(-2)}:-:{("0"+hora).slice(-2)}{("0"+min).slice(-2)}{("0"+seg).slice(-2)}</p>
-
-    }
+  
   return (
     <div className="container">
       <div className="row mt-3">
@@ -90,9 +81,7 @@ function App() {
           Finding ID:
         </div>
         <div className="col-4 form-control" >
-          {
-           pepe() 
-          }
+          <FindingIdTime />
         </div>
       </div>
 
