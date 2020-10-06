@@ -1,20 +1,62 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import dataJson from './ic4pro_findings.json'
+import Iterator from './Components/Iterator'
+import DescriptiveFindings from './Components/DescriptiveFindings/DescriptiveFindings';
 
 function App() {
 
-  const [descFindings, setDescFindings] = useState([])
+  const [descFindings, setDescFindings] = useState(dataJson.descriptiveFindings ? dataJson.descriptiveFindings : [])
+  const [analyticFindings , setAnalyticFindings] = useState({})
+  const [frequency, setFrequency] = useState(1)
+  const [totalScore, setTotalScore] = useState(0)
+  const [avgScoring, setAvgScoring] = useState(0)
+
+  const border = {
+    border: '1px solid grey',
+
+    center :{
+      border: '1px solid grey',
+      textAlign : 'center'
+    }
+  }
+
+  
 
   useEffect(() => {
-    setDescFindings(dataJson.descriptiveFindings)
-  }, [])
+    let datos = Iterator(descFindings)
+    let freq = 0
+    let tScore = 0
+    let avg = 0
+    setAnalyticFindings(datos)
+    
+    Object.keys(datos).map((res, i) => {
+      //console.log(datos[res]["frequency"])
+      freq = freq + datos[res]["frequency"]
+      tScore = tScore + datos[res]["scoring"]
+      avg = (tScore / freq).toFixed(2)
+      setFrequency (freq)
+      setTotalScore(tScore)
+      setAvgScoring(avg)
+
+      return true
+    })
+
+    if(Object.keys(datos) < 1){
+      setFrequency (0)
+      setTotalScore(0)
+      setAvgScoring(0)
+    }
+    //console.log(Object.keys(datos))
+
+  }, [descFindings])
 
   const handleDelete = (i) => {
 
     const newRows = descFindings.slice(0, i).concat(descFindings.slice(i+1))
 
     setDescFindings(newRows)
+    
     
   }
 
@@ -29,6 +71,18 @@ function App() {
       ])
   }
 
+
+  const pepe = () => {let Fecha = new Date()
+    let año = Fecha.getFullYear()
+    let mes = Fecha.getMonth() + 1
+    let dia = Fecha.getDay()
+    let hora = Fecha.getHours()
+    let min = Fecha.getMinutes()
+    let seg = Fecha.getSeconds()
+
+  return <p>{año}{("0"+mes).slice(-2)}{("0"+dia).slice(-2)}:-:{("0"+hora).slice(-2)}{("0"+min).slice(-2)}{("0"+seg).slice(-2)}</p>
+
+    }
   return (
     <div className="container">
       <div className="row mt-3">
@@ -36,7 +90,9 @@ function App() {
           Finding ID:
         </div>
         <div className="col-4 form-control" >
-          YYYYMMDD...
+          {
+           pepe() 
+          }
         </div>
       </div>
 
@@ -110,7 +166,7 @@ function App() {
 
 
       {/* Analyticalfindings */}
-      <div style={{border: '1px solid grey', borderRadius: '1%'}} className="p-3 mt-3">
+      <div style={{border: '1px solid grey', borderRadius: '1%'}} className="p-3 mt-3 mb-3">
       
           <h6 className="mb-2 p-2" style={{background : '#FFC107', borderRadius: '5%'}}>Analytical Findings</h6>
          
@@ -131,13 +187,16 @@ function App() {
             <tbody>
 
               {
-                descFindings.map((res, i) => {
+                
+                Object.keys(analyticFindings).map((res, i) => {
+                  
+                
                   return (
                     <tr key={i}>
-                      <td>{res.accountNo}</td>
-                      <td>{res.findings}</td>
-                      <td>{res.scoring}</td>
-                      <td>{res.riskrating}</td>
+                      <td>{res}</td>
+                      <td>{analyticFindings[res]["frequency"]}</td>
+                      <td>{analyticFindings[res]["scoring"]}</td>
+                      <td>{analyticFindings[res]["riskrating"]}</td>
                       <td>TBD</td>
                     </tr>
 
@@ -148,12 +207,48 @@ function App() {
             </tbody>
           </table>
         </div>
+
+        
       </div>
       
+      {/* Resume */}
+      <div className="row mt-2">
+              <div className="col-2 ml-2" style={border}>
+                Total Frequency
+              </div>
+              <div className="col-1" style={border.center}>
+              {frequency}
+              </div>
+      </div>
+
+      <div className="row mt-2" >
+              <div className="col-2 ml-2" style={border}>
+                GrandTotal Scoring
+              </div>
+              <div className="col-1" style={border.center}>
+              {totalScore}
+              </div>
+      </div>
+
+      <div className="row mt-2">
+              <div className="col-2 ml-2" style={border}>
+                Average Scoring
+              </div>
+              <div className="col-1" style={border.center}>
+              {avgScoring}
+              </div>
+      </div>
+      {/* End Resume */}
 
      
       </div>
       {/* End of Analyticalfindings */}
+
+      {/* Testing */}
+              <DescriptiveFindings>
+                
+              </DescriptiveFindings>
+      {/* End Testing */}
     </div>
   );
 }

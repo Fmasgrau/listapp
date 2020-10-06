@@ -1,0 +1,57 @@
+[
+  {
+    "accountNo":"1000130",
+    "description":"First Vault Cash",
+	"category": "1000",
+    "recordDate":"20200603",
+    "recordTime":"10:30:40",
+    "operator":"adroit",
+    "operation":"edit",
+    "workstation":"11.20.10.1",
+    "recordCounter":"1"
+    },
+	{
+    "accountNo":"1212345",
+    "description":"Second Vault Cash",
+	"category": "1000",
+    "recordDate":"20200603",
+    "recordTime":"10:30:40",
+    "operator":"adroit",
+    "operation":"edit",
+    "workstation":"11.20.10.1",
+    "recordCounter":"1"
+    },
+	{
+    "accountNo":"1301345",
+    "description":"Customer Vault Cash",
+	"category": "1000",
+    "recordDate":"20200603",
+    "recordTime":"10:30:40",
+    "operator":"adroit",
+    "operation":"edit",
+    "workstation":"11.20.10.1",
+    "recordCounter":"1"
+    },
+	{
+	"accountNo":"40402040",
+    "description":"Flexclose",
+	"category": "1000",
+    "recordDate":"20200603",
+    "recordTime":"10:30:40",
+    "operator":"adroit",
+    "operation":"edit",
+    "workstation":"11.20.10.1",
+    "recordCounter":"1"
+    },
+    {
+	"accountNo":"403032040",
+    "description":"Left and Right",
+	"category": "1000",
+    "recordDate":"20200603",
+    "recordTime":"10:30:40",
+    "operator":"adroit",
+    "operation":"edit",
+    "workstation":"11.20.10.1",
+    "recordCounter":"1"
+    },
+]
