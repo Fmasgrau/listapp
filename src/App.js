@@ -4,6 +4,7 @@ import dataJson from './Components/Data/Dummy/ic4pro_findings.json'
 import Iterator from './Components/Iterator'
 import DescriptiveFindings from './Components/DescriptiveFindings/DescriptiveFindings';
 import FindingIdTime from './Components/Date/FindingIdTime';
+import EntityId from './Components/EntityId/EntityId';
 
 function App() {
 
@@ -91,13 +92,7 @@ function App() {
           Entity ID:
         </div>
         <div className="col-4 pl-1" >
-          <select className="form-control" id="exampleFormControlSelect1">
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
-            <option>5</option>
-          </select>
+          <EntityId />
         </div>
       </div>
       {/* End of Entity Id */}

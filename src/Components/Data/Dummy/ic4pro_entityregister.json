@@ -103,7 +103,7 @@
                   "riskRating": "High", 
                   "implications": "memo",
                   "riskAction": "memo"
-                 },	 
+                 }	 
 				 ],
 	"queryBuilder": "memo",	
     "recordDate":"20200603",
@@ -159,7 +159,7 @@
                   "riskRating": "High",
                   "implications": "memo",
                   "riskAction": "memo"
-                 },	 
+                 }
 				 ],
 	"queryBuilder": "memo",
     "recordDate":"20200603",
@@ -216,7 +216,7 @@
                   "riskRating": "High",   
                   "implications": "memo",
                   "riskAction": "memo"
-                 },	 
+                 }	 
 				 ],
 	"queryBuilder": "memo",
     "recordDate":"20200603",
@@ -240,7 +240,7 @@
 		 },
 		 {
       	    "indicator":"incompleteMEMAT"
-		 }
+		 },
 		 {
       	    "indicator":"expiredMEMAT"    
 		 }
@@ -276,7 +276,7 @@
                   "riskRating": "High",     
                   "implications": "memo",
                   "riskAction": "memo"
-                 },	 
+                 }
 				 ],
 	"queryBuilder": "memo",
     "recordDate":"20200603",
@@ -333,7 +333,7 @@
                   "riskRating": "High",                 
                   "implications": "memo",
                   "riskAction": "memo"
-                 },	 
+                 }	 
 				 ],
 	"queryBuilder": "memo",
     "recordDate":"20200603",
@@ -356,7 +356,7 @@
 		 },
 		 {
       	    "indicator":"invalidcard"                   
-		 }
+		 },
 		 {
       	    "indicator":"cardmissing"                  
 		 }
@@ -392,7 +392,7 @@
                   "riskRating": "High",              
                   "implications": "memo",
                   "riskAction": "memo"
-                 },	 
+                 } 
 				 ],	 
 	"queryBuilder": "memo",
     "recordDate":"20200603",
@@ -401,6 +401,6 @@
     "operation":"edit",
     "workstation":"11.20.10.1",
     "recordCounter":"1"
-    },
+    }
 ]
 	
