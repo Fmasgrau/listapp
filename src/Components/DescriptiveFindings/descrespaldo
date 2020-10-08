@@ -1,0 +1,95 @@
+import React, { useState, useEffect } from "react";
+import { useForm, useFieldArray, useWatch } from "react-hook-form";
+import dataAccounts from '../Data/Dummy/ic4pro_accounts.json'
+import entityRegister from '../Data/Dummy/ic4pro_entityregister.json'
+import EntityId from "../EntityId/EntityId";
+
+
+export default function DescriptiveFindings({ entityId }) {
+
+ 
+  const { register, control, handleSubmit } = useForm({
+    defaultValues: {
+      accounts : [1,2,3,4]
+    }
+  });
+  const { fields, append, remove } = useFieldArray({
+    control,
+    name: 'accounts'
+  })
+
+ 
+  const onSubmit = (data) => console.log("data", data);
+
+  return (
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <div className="container">
+        <div className="row">
+          <div className="col-3">
+            Account N°
+          </div>
+          <div className="col-3">
+            Findings
+          </div>
+          <div className="col-2">
+            Scoring
+          </div>
+          <div className="col-2">
+            Ratings
+          </div>
+          <div className="col-2">
+
+          </div>
+        </div>
+        {fields.map(({ id }, index) => {
+          return (
+            <div className="row mt-3" key={id}>
+              <div className="col-3">
+                <select ref={register()} name="accountNo" className="custom-select">
+                  <option>---</option>
+                  {
+                    dataAccounts.map((res, index) => {
+                      return(
+                      <option key={index}>{res.accountNo}</option>
+                      )
+                    })
+                  }
+                </select>
+              </div>
+              <div className="col-3">
+                <select ref={register()} name="findings" className="custom-select">
+                  <option>---</option>
+                  {
+                    entityRegister.map(res => {
+                      if (res.key === entityId){
+                        return(
+                          res.riskIndicator.map(res => {
+                          return(<option>{res.indicator}</option>)
+                          })
+                        )
+                      }
+                      
+                    })
+                  }
+                </select>
+              </div>
+              <div className="col-2">
+                <input className="form-control" ref={register()} name="scoring"></input>
+              </div>
+              <div className="col-2">
+                <input className="form-control" ref={register()} name="rating"></input>
+              </div>
+              <div className="col-2">
+                <button type="button" className="btn btn-sm btn-danger" onClick={() => remove(index)}>Delete</button>
+              </div>
+            </div>
+          )
+        })}
+      </div>
+
+
+      <button type="button" className="btn btn-sm btn-primary mt-3" onClick={() => append({})}>Add Acount</button>
+      <button type="submit" className="btn btn-sm btn-primary mt-3" >Submit</button>
+    </form>
+  )
+}

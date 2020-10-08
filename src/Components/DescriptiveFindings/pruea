@@ -1,0 +1,64 @@
+const [data, setData] = useState([]);
+  const { register, getValues, watch, handleSubmit, control } = useForm();
+  const at = watch("at", 2);
+
+
+  useEffect( ()=> {
+    setData([...data, { id: id() , "accountNo"  : dataAccounts[0].accountNo}]);
+  },[])
+
+  const append = () => {
+    setData([...data, { id: id() }]);
+  };
+
+  const remove = index => {
+    setData([...data.slice(0, index), ...data.slice(index + 1)]);
+  };
+
+
+
+
+  const onSubmit = data => {
+    alert(JSON.stringify(data));
+  };
+
+  renderCount++;
+
+  return (
+    <form onSubmit={handleSubmit(onSubmit)}>
+
+      <ul>
+        <li>
+          <span>Account N°</span>
+          <span>Account N°</span>
+          <span>Account N°</span>
+          <span>Account N°</span>
+          <span>Account N°</span>
+        </li>
+        {data.map((item, index) => (
+          <li key={item.id}>
+            <span>{item.accountNo}</span>
+            <span>{item.accountNo}</span>
+            <span>{item.accountNo}</span>
+            <span>{item.accountNo}</span>
+            <button className="btn btn-sm btn-danger" onClick={() => remove(index)}>Delete</button>
+          </li>
+        ))}
+      </ul>
+      <section>
+        <button
+          className="btn btn-sm btn-primary"
+          type="button"
+          onClick={() => {
+            append();
+          }}
+        >
+          Add Account
+        </button>
+
+
+      </section>
+
+      <input type="submit" />
+    </form>
+  );
