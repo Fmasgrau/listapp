@@ -29,12 +29,8 @@ function ModalFindings() {
 
   const finalRiskRating = (score) => {
     
-    if(typeof(score) === 'string'){
-      console.log("string")
-      score = parseInt(score)
-    }
     
-    if (score === 0 || score === undefined) {
+    if (score === '0.00' || score === undefined || score === 0.00) {
       setFinalRisk("")
     }else{
       console.log("finalriskelse",score)
@@ -50,18 +46,15 @@ function ModalFindings() {
   }
 
   const __grandreMarks = (score) => {
-    if(typeof(score) === 'string'){
-      console.log("string")
-      score = parseInt(score)
-    }
+  
     console.log("grand",score)
-    if (score === 0 || score === undefined) {
+    if (score === '0' || score === undefined) {
       console.log("entro aca?")
       setGrandreMarks("")
     }else{
     entityRegister.map(res => {
       if (res.key === entityId) {
-        //console.log("grandent", score)
+        console.log("grandent", score)
         res.riskAssessment.map(res2 => {
           console.log("grandent2", res2)
           if (res2.riskRating === score) {
