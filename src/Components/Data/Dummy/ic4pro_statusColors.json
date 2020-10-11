@@ -1,0 +1,54 @@
+[
+  {
+    "colourId":"RED",
+  "RGB":"FF0000",
+  "FontColor": "white"
+  },
+   {
+    "colourId":"BLUE",
+  "RGB":"0000FF",
+  "FontColor": "white"
+  },
+   {
+    "colourId":"GREEN",
+  "RGB":"009900",
+  "FontColor": "white"
+  },
+   {
+    "colourId":"YELLOW",
+  "RGB":"FFFF00",
+  "FontColor": "black"
+  },
+   {
+    "colourId":"GOLD",
+  "RGB":"FFFF99",
+  "FontColor": "black"
+  },
+   {
+    "colourId":"ORANGE",
+  "RGB":"FF8800",
+  "FontColor": "white"
+  },
+   {
+    "colourId":"LIGHT-GREEN",
+  "RGB":"33FF33",
+  "FontColor": "black"
+  },
+   {
+    "colourId":"LIGHT-BLUE",
+  "RGB":"66B2FF",
+  "FontColor": "white"
+  },
+   {
+    "colourId":"TORQUIOSE",
+  "RGB":"66FFFF",
+  "FontColor": "black"
+  },
+     {
+    "colourId":"LIGHT-ORANGE",
+  "RGB":"CC6600",
+  "FontColor": "white"
+  }
+
+  ]
+  

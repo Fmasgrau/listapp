@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import './App.css';
-import showAnalyticalFindings from './Components/showAnalyticalFindings'
-import DescriptiveFindings from './Components/DescriptiveFindings/DescriptiveFindings';
-import FindingIdTime from './Components/Date/FindingIdTime';
-import EntityId from './Components/EntityId/EntityId';
-import riskAssesment from './Components/Data/Dummy/ic4pro_RiskAssessment.json'
-import riskColour from './Components/Data/Dummy/ic4pro_statusColors.json'
-import riskIndicator from './Components/Data/Dummy/ic4pro_riskIndicators.json'
-import entityRegister from './Components/Data/Dummy/ic4pro_entityregister.json'
-import Color from './Components/Color/Color'
+import '../../App.css';
+import showAnalyticalFindings from '../showAnalyticalFindings'
+import DescriptiveFindings from '../DescriptiveFindings/DescriptiveFindings';
+import FindingIdTime from '../Date/FindingIdTime';
+import EntityId from '../EntityId/EntityId';
+import riskAssesment from '../Data/Dummy/ic4pro_RiskAssessment.json'
+import riskColour from '../Data/Dummy/ic4pro_statusColors.json'
+import riskIndicator from '../Data/Dummy/ic4pro_riskIndicators.json'
+import entityRegister from '../Data/Dummy/ic4pro_entityregister.json'
+import Color from '../Color/Color'
 
-function App() {
+function ModalFindings() {
 
   const [descFindings, setDescFindings] = useState() //useState(dataJson.descriptiveFindings ? dataJson.descriptiveFindings : [])
   const [analyticFindings, setAnalyticFindings] = useState({})
@@ -28,11 +28,16 @@ function App() {
   }
 
   const finalRiskRating = (score) => {
-
-    if (score === 0) {
-      setFinalRisk("")
+    
+    if(typeof(score) === 'string'){
+      console.log("string")
+      score = parseInt(score)
     }
-
+    
+    if (score === 0 || score === undefined) {
+      setFinalRisk("")
+    }else{
+      console.log("finalriskelse",score)
     for (let i = 0; i < riskAssesment.length; i++) {
       //console.log("for",Math.round(score),riskAssesment[i].matrixLowerBand, riskAssesment[i].matrixUpperBand  )
       if (Math.round(score) >= riskAssesment[i].matrixLowerBand && Math.round(score) <= riskAssesment[i].matrixUpperBand) {
@@ -41,25 +46,31 @@ function App() {
 
       }
     }
-
+  }
   }
 
   const __grandreMarks = (score) => {
-    //console.log("grand",score)
-    if (score === 0) {
-      setGrandreMarks("")
+    if(typeof(score) === 'string'){
+      console.log("string")
+      score = parseInt(score)
     }
+    console.log("grand",score)
+    if (score === 0 || score === undefined) {
+      console.log("entro aca?")
+      setGrandreMarks("")
+    }else{
     entityRegister.map(res => {
       if (res.key === entityId) {
         //console.log("grandent", score)
         res.riskAssessment.map(res2 => {
-          //console.log("grandent2", res2)
+          console.log("grandent2", res2)
           if (res2.riskRating === score) {
             setGrandreMarks(res2.implications)
           }
         })
       }
     })
+  }
   }
 
 
@@ -81,6 +92,14 @@ function App() {
     let avg = 0
     setAnalyticFindings(datos)
 
+    if (Object.keys(datos) < 1) {
+      setFrequency(0)
+      setTotalScore(0)
+      setAvgScoring(0)
+      finalRiskRating(0)
+      __grandreMarks(0)
+    }else{
+      console.log("keys",Object.keys(datos))
     Object.keys(datos).map((res, i) => {
       console.log(datos[res]["frequency"])
       freq = freq + datos[res]["frequency"]
@@ -96,13 +115,7 @@ function App() {
       return true
     })
 
-    if (Object.keys(datos) < 1) {
-      setFrequency(0)
-      setTotalScore(0)
-      setAvgScoring(0)
-      finalRiskRating(0)
-      __grandreMarks(0)
-    }
+  }
     console.log(Object.keys(datos))
 
   }, [descFindings])
@@ -263,4 +276,4 @@ function App() {
   );
 }
 
-export default App;
+export default ModalFindings;

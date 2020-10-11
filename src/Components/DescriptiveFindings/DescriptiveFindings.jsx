@@ -4,7 +4,7 @@ import dataAccounts from '../Data/Dummy/ic4pro_accounts.json'
 import entityRegister from '../Data/Dummy/ic4pro_entityregister.json'
 import riskIndicators from '../Data/Dummy/ic4pro_riskIndicators.json'
 import riskAssessment from '../Data/Dummy/ic4pro_RiskAssessment.json'
-import Iterator from '../Iterator'
+
 
 
 export default function DescriptiveFindings({ entityId, handleFindings }) {
@@ -33,15 +33,16 @@ export default function DescriptiveFindings({ entityId, handleFindings }) {
 
 
 
-useEffect(()=>{
-  handleFindings(watch().descriptiveFindings)
-  
-}, [fields, item1])
+  useEffect(() => {
+    handleFindings(watch().descriptiveFindings)
+
+  }, [fields, item1])
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
+      <h6 className="mb-4 p-2" style={{ background: '#FFC107', borderRadius: '2%' }}>Descriptive Findings</h6>
+      <div className="container mt-2">
 
-      <div className="container">
         <div className="row">
           <div className="col-3">
             <h6>Account N°</h6>
@@ -88,14 +89,20 @@ useEffect(()=>{
                   onChange={
                     (e) => {
                       let riskI = 0
-                      riskIndicators.map(res => {
-                        if (res.key === e.target.value) {
-                          console.log(res.riskValue)
-                          riskI = res.riskValue
+                 
+                      for (let i = 0; i < riskIndicators.length; i++) {
+                        if (riskIndicators[i].key === e.target.value) {
+                          //console.log("entro al if",riskIndicators[i].riskValue)
+                          riskI = riskIndicators[i].riskValue
                           setValue(`descriptiveFindings[${index}].scoring`, riskI)
                           setItem(!item1)
+                          break
+                        } else {
+                          setValue(`descriptiveFindings[${index}].scoring`, 0)
+                          setItem(!item1)
+                          //console.log("no entiendo porque", riskI)
                         }
-                      })
+                      }
 
                       for (let i = 0; i < riskAssessment.length; i++) {
                         //console.log(riskAssessment[i])
@@ -132,15 +139,6 @@ useEffect(()=>{
                 </select>
               </div>
 
-              {/* <div className="col-2">
-                <input
-                  name={`descriptiveFindings[${index}].scoring`}
-                  defaultValue={0} // make sure to set up defaultValue
-                  ref={register()}
-                  className="form-control mt-3 text-center"
-                  disabled
-                />
-              </div> */}
 
               <div className="col-2">
                 <Controller
@@ -163,7 +161,7 @@ useEffect(()=>{
                   disabled// make sure to set up defaultValue
                 />
               </div>
-              
+
               <div className="col-2">
                 <button type="button" onClick={() => {
 
@@ -171,7 +169,7 @@ useEffect(()=>{
                   //console.log(fields)
                   //setDeleteValue(!deleteValue)
                   //handleFindings(dataJson)
-                  
+
                 }} className="btn btn-sm btn-danger mt-3">
                   Delete
               </button>

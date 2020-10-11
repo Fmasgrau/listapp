@@ -7,6 +7,20 @@
 	"likelihood":"2",
 	"riskValue": "6",
 	"remarks": "Medium",
+	"analyticalfindings":[
+	      {
+		    "riskassessmentId":"Low",
+			"riskimplication":"Low - Account Inactive"
+	      },
+		  {
+		    "riskassessmentId":"Medium",
+			"riskimplication":"Medium - Account Inactive"
+	      },
+		  {
+		    "riskassessmentId":"High",
+			"riskimplication":"High - Account Inactive"
+	      }
+	     ],
     "recordDate":"20200603",
     "recordTime":"10:30:40",
     "operator":"adroit",
@@ -22,6 +36,20 @@
 	"likelihood":"4",
     "riskValue": "4",
 	"remarks": "Low",
+	"analyticalfindings":[
+	      {
+		    "riskassessmentId":"Low",
+			"riskimplication":"Low - Overdraft not authorised"
+	      },
+		  {
+		    "riskassessmentId":"Medium",
+			"riskimplication":"Medium - Overdraft not authorised"
+	      },
+		  {
+		    "riskassessmentId":"High",
+			"riskimplication":"High - Overdraft not authorised"
+	      }
+	     ],
     "recordDate":"20200603",
     "recordTime":"10:30:40",
     "operator":"adroit",
@@ -37,6 +65,21 @@
 	"likelihood":"3",
     "riskValue": "6",
 	"remarks": "Medium",
+    "analyticalfindings":[
+	      {
+		    "riskassessmentId":"Low",
+			"riskimplication":"Low - Overdrawn is illegal"
+	      },
+		  {
+		    "riskassessmentId":"Medium",
+			"riskimplication":"Medium - Overdrawn is illegal"
+	      },
+		  {
+		    "riskassessmentId":"High",
+			"riskimplication":"High - Overdrawn is illegal"
+	      }
+	     ],	
+	
     "recordDate":"20200603",
     "recordTime":"10:30:40",
     "operator":"adroit",
@@ -51,6 +94,7 @@
 	"severity":"3",
 	"likelihood":"3",
 	"riskValue": "9",
+	"analyticalfindings":[],
 	"remarks": "High",
     "recordDate":"20200603",
     "recordTime":"10:30:40",
@@ -67,6 +111,20 @@
 	"likelihood":"2",
 	"riskValue": "4",
 	"remarks": "Low",
+	"analyticalfindings":[
+	      {
+		    "riskassessmentId":"Low",
+			"riskimplication":"Low - Identification"
+	      },
+		  {
+		    "riskassessmentId":"Medium",
+			"riskimplication":"Medium - Identification"
+	      },
+		  {
+		    "riskassessmentId":"High",
+			"riskimplication":"High - Identification"
+	      }
+	     ],
     "recordDate":"20200603",
     "recordTime":"10:30:40",
     "operator":"adroit",
@@ -82,6 +140,20 @@
 	"likelihood":"1",
 	"riskValue": "2",
 	"remarks": "Low",
+	"analyticalfindings":[
+	      {
+		    "riskassessmentId":"Low",
+			"riskimplication":"Low - No Referee"
+	      },
+		  {
+		    "riskassessmentId":"Medium",
+			"riskimplication":"Medium - No Referee"
+	      },
+		  {
+		    "riskassessmentId":"High",
+			"riskimplication":"High - No Referee"
+	      }
+	     ],
     "recordDate":"20200603",
     "recordTime":"10:30:40",
     "operator":"adroit",
@@ -97,6 +169,20 @@
 	"likelihood":"1",
 	"riskValue": "2",
 	"remarks": "Low",
+    "analyticalfindings":[
+	      {
+		    "riskassessmentId":"Low",
+			"riskimplication":"Wrong Referee - Low "
+	      },
+		  {
+		    "riskassessmentId":"Medium",
+			"riskimplication":"Wrong Referee - Medium"
+	      },
+		  {
+		    "riskassessmentId":"High",
+			"riskimplication":"Wrong Referee - High"
+	      }
+	     ],
     "recordDate":"20200603",
     "recordTime":"10:30:40",
     "operator":"adroit",
@@ -112,6 +198,7 @@
 	"likelihood":"3",
 	"riskValue": "6",
 	"remarks": "Medium",
+	"analyticalfindings":[],
     "recordDate":"20200603",
     "recordTime":"10:30:40",
     "operator":"adroit",
@@ -142,6 +229,7 @@
 	"likelihood":"4",
 	"riskValue": "12",
 	"remarks": "High",
+	"analyticalfindings":[],
     "recordDate":"20200603",
     "recordTime":"10:30:40",
     "operator":"adroit",
@@ -157,6 +245,7 @@
 	"likelihood":"2",
 	"riskValue": "4",
 	"remarks": "Low",
+	"analyticalfindings":[],
     "recordDate":"20200603",
     "recordTime":"10:30:40",
     "operator":"adroit",
@@ -172,6 +261,7 @@
 	"likelihood":"4",
 	"riskValue": "12",
 	"remarks": "High",
+	"analyticalfindings":[],
     "recordDate":"20200603",
     "recordTime":"10:30:40",
     "operator":"adroit",
@@ -187,6 +277,7 @@
 	"likelihood":"4",
 	"riskValue": "12",
 	"remarks": "High",
+	"analyticalfindings":[],
     "recordDate":"20200603",
     "recordTime":"10:30:40",
     "operator":"adroit",
@@ -202,6 +293,7 @@
 	"likelihood":"3",
 	"riskValue": "9",
 	"remarks": "High",
+	"analyticalfindings":[],
     "recordDate":"20200603",
     "recordTime":"10:30:40",
     "operator":"adroit",
@@ -217,6 +309,7 @@
 	"likelihood":"3",
 	"riskValue": "9",
 	"remarks": "High",
+	"analyticalfindings":[],
     "recordDate":"20200603",
     "recordTime":"10:30:40",
     "operator":"adroit",
@@ -232,6 +325,7 @@
 	"likelihood":"2",
 	"riskValue": "4",
 	"remarks": "Low",
+	"analyticalfindings":[],
     "recordDate":"20200603",
     "recordTime":"10:30:40",
     "operator":"adroit",
@@ -247,6 +341,7 @@
 	"likelihood":"2",
 	"riskValue": "4",
 	"remarks": "Low",
+	"analyticalfindings":[],
     "recordDate":"20200603",
     "recordTime":"10:30:40",
     "operator":"adroit",
@@ -262,6 +357,7 @@
 	"likelihood":"3",
 	"riskValue": "6",
 	"remarks": "Medium",
+	"analyticalfindings":[],
     "recordDate":"20200603",
     "recordTime":"10:30:40",
     "operator":"adroit",
@@ -277,13 +373,14 @@
 	"likelihood":"3",
 	"riskValue": "3",
 	"remarks": "Low",
+	"analyticalfindings":[],
     "recordDate":"20200603",
     "recordTime":"10:30:40",
     "operator":"adroit",
     "operation":"edit",
     "workstation":"11.20.10.1",
     "recordCounter":"1"
-    }	
+    }
 ]
 	
 	

@@ -8,10 +8,12 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'jquery/dist/jquery.js';
 import 'popper.js/dist/popper.js';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
+import ModalFindings from './Components/Modal/ModalFindings';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    {/* <App /> */}
+    <ModalFindings></ModalFindings>
   </React.StrictMode>,
   document.getElementById('root')
 );

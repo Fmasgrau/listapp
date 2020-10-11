@@ -1,39 +1,21 @@
-import Iterator from './Iterator'
+import showAnalyticalFindings from './showAnalyticalFindings'
+import dataRA from './Data/Dummy/ic4pro_RiskAssessment.json'
+import dataRI from './Data/Dummy/ic4pro_riskIndicators.json'
 
 
 
-describe('Iterator', () => {
+describe('showAnalyticalFindings', () => {
 
-    const json = [
-        {
-            "accountNo": "1000130",
-            "findings": "overdraft",
-            "scoring": "4",
-            "riskrating": "Low"
-        },
-        {
-            "accountNo": "1212345",
-            "findings": "inactive",
-            "scoring": "6",
-            "riskrating": "Medium"
-        },
-        {
-            "accountNo": "1301345",
-            "findings": "overdraft",
-            "scoring": "4",
-            "riskrating": "Low"
-        },
-        {
-            "accountNo": "1000130",
-            "findings": "override",
-            "scoring": "9",
-            "riskrating": "High"
-        }
-    ]
+    test('testing none array', () => {
+
+        const none = showAnalyticalFindings([])
+        expect(none).toMatchObject({})
+    })
+   
 
     test('testing empty array', () => {
 
-        const zero = Iterator()
+        const zero = showAnalyticalFindings()
         expect(zero).toMatchObject({})
     })
 
@@ -47,9 +29,9 @@ describe('Iterator', () => {
                 "riskrating": "Low"
             }]
 
-        const one = Iterator(json)
+        const one = showAnalyticalFindings(json, dataRA, dataRI)
 
-        expect(one).toStrictEqual({ "overdraft": { "scoring": 4, "riskrating": "Low" , "frequency": 1} })
+        expect(one).toStrictEqual({ "overdraft": { "scoring": 4, "riskrating": "Low" , "frequency": 1, "riskadvice" : "Low - Overdraft not authorised"} })
     })
 
     test('testing many elements without rep', () => {
@@ -73,12 +55,12 @@ describe('Iterator', () => {
                 "riskrating": "High"
             }]
 
-        const many = Iterator(json)
+        const many = showAnalyticalFindings(json, dataRA, dataRI)
 
         expect(many).toStrictEqual({
-            "overdraft": { "scoring": 4, "riskrating": "Low" , "frequency": 1},
-            "inactive": { "scoring": 6, "riskrating": "Medium" , "frequency": 1},
-            "override": { "scoring": 9, "riskrating": "High" , "frequency": 1},
+            "overdraft": { "scoring": 4, "riskrating": "Low" , "frequency": 1, "riskadvice" : "Low - Overdraft not authorised"},
+            "inactive": { "scoring": 6, "riskrating": "Low" , "frequency": 1, "riskadvice": "Low - Account Inactive"},
+            "override": { "scoring": 9, "riskrating": "Medium" , "frequency": 1, "riskadvice" : "Send warning to the account holders"},
         })
     })
 
@@ -116,14 +98,16 @@ describe('Iterator', () => {
                 "riskrating": "Low"
             }]
 
-        const many = Iterator(json)
+        const many = showAnalyticalFindings(json, dataRA, dataRI)
 
         expect(many).toStrictEqual({
-            "overdraft": { "scoring": 12, "riskrating": "Low" , "frequency": 3},
-            "inactive": { "scoring": 6, "riskrating": "Medium" , "frequency" : 1},
-            "override" : {"scoring": 9, "riskrating": "High", "frequency": 1}
+            "overdraft": { "scoring": 12, "riskrating": "Medium" , "frequency": 3, "riskadvice" : "Medium - Overdraft not authorised"},
+            "inactive": { "scoring": 6, "riskrating": "Low" , "frequency" : 1, "riskadvice" : "Low - Account Inactive"},
+            "override" : {"scoring": 9, "riskrating": "Medium", "frequency": 1, "riskadvice" : "Send warning to the account holders"}
             
         })
     })
 
+
+    
 })
