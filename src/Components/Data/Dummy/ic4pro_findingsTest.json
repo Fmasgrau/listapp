@@ -1,0 +1,59 @@
+[{
+    "findingsId":"20200925-101230",
+    "entityId":"utitlityBills",
+    "descriptiveFindings":[
+                {
+                "accountNo":"1000130",
+                "findings":"overdraft",	   
+                "scoring":"4",
+                "riskrating":"Low"
+                },  
+               {
+               "accountNo":"1212345",
+               "findings": "inactive",  
+               "scoring":"6",
+               "riskrating":"Medium"
+               },	   
+               {
+               "accountNo":"1301345",
+               "findings":"overdraft",
+               "scoring":"4",
+               "riskrating":"Low"
+               },	  
+               {
+               "accountNo":"1000130",
+               "findings":"override", 
+               "scoring": "9",
+               "riskrating":"High"
+               }	
+               ],
+    
+    "analyticalfindings":[
+             {
+              "riskClassification":"overdraft",
+              "frequency":"2",
+              "totalscoring":"8",
+              "findingsrating":"Medium",
+              "findingsRemarks":"Send warning to the account holders"
+              },
+              {
+              "riskClassification":"inactive",
+              "frequency":"1",
+              "totalscoring":"6",
+              "findingsrating":"Low",
+              "findingsRemarks":"Keep watching the accounts"
+              },
+              {
+              "riskClassification":"override",
+              "frequency":"1",
+              "totalscoring":"9",
+              "findingsrating":"Medium",
+              "findingsRemarks":"Medium risk account - block the account"
+              }
+             ],		  
+    "totalfrequency": "4",
+    "grandtotalscoring":"23",
+    "averagescoring" : "5.75",
+    "finalriskrating": "Medium",     		 
+    "grandremarks":"Severity is high"
+    }]

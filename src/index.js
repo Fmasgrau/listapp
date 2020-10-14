@@ -12,8 +12,8 @@ import ModalFindings from './Components/Modal/ModalFindings';
 
 ReactDOM.render(
   <React.StrictMode>
-    {/* <App /> */}
-    <ModalFindings></ModalFindings>
+    <App />
+    {/* <ModalFindings></ModalFindings> */}
   </React.StrictMode>,
   document.getElementById('root')
 );
