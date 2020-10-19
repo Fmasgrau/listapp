@@ -1,6 +1,6 @@
 [
   {
-    "key":"utilityBill",
+    "key":"utitlityBills",
     "description":"Utility Bills Details",
 	"entityClassId": "auditAMLKYC",
 	"riskIndicator": [

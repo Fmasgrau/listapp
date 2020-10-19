@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
     Container,
     Row,
@@ -7,27 +7,81 @@ import {
     Card,
 } from 'react-bootstrap';
 import ModalFindings from '../../Components/Modal/ModalFindings'
+import ModalView from '../../Components/Modal/ModalView'
 
-// Components
-//import Form from '../../components/Worksheet/Form';
 import Table from '../../Components/Table/Table';
 
 import jsonFindings from '../../Components/Data/Dummy/ic4pro_findingsTest.json';
 
 const Worksheet = () => {
-    const [state, setState] = useState({
-        data: [...jsonFindings],
-        showForm: false,
-        selectedData: null,
-        mode: null
-    });
 
-    const [data, setData] = useState(jsonFindings)
+    const [data, setData] = useState([])
     const [showForm, setShowForm] = useState(false)
+    const [rowSelected, setRowSelected] = useState()
+    const [mode, setMode] = useState("")
+    
+
+    useEffect(() => {
+        setData(jsonFindings)
+    }, [])
 
 
-    const cancelModal = () =>{
+    const createModal = () => {
+        setShowForm(true)
+        setMode("create")
+    }
+
+    const editModal = () => {
+        setShowForm(true)
+        setMode("edit")
+        
+    }
+
+    const saveModal = (e) => {
+        //console.log("saveModaldesdeHome", e)
         setShowForm(false)
+        setData([...data, e])
+    }
+
+    const viewModal = () => {
+        console.log("viewModal", data[rowSelected])
+        setMode("view")
+        setShowForm(true)
+
+    }
+
+    const deleteModal = (e) => {
+        setMode("delete")
+        setShowForm(true)
+    }
+
+    const deleteRow = (e) => {
+
+        if(e){
+         let lista = []
+        let datos = data.map((res, index) => {
+            if (rowSelected !== index && rowSelected !== null) {
+                lista.push(res)
+            }
+        }
+        )
+
+        if (rowSelected !== null) {
+            setData(lista)
+        }
+
+        setShowForm(false)
+    }
+        console.log("delete", e)
+    }
+
+    const cancelModal = () => {
+        setShowForm(false)
+    }
+
+    const __onSelect = (e) => {
+        setRowSelected(e)
+        //console.log("select data", e)
     }
 
     return (
@@ -45,7 +99,7 @@ const Worksheet = () => {
                                 variant="info"
                                 size="sm"
                                 name="create"
-                                onClick={() => setShowForm(true)}
+                                onClick={createModal}
                             >
                                 Create
               </Button>
@@ -54,7 +108,8 @@ const Worksheet = () => {
                                 size="sm"
                                 className="ml-1"
                                 name="edit"
-                            //disabled={!state.selectedData}
+                                onClick={editModal}
+                                disabled={rowSelected === undefined ? true : false}
 
                             >
                                 Edit
@@ -64,7 +119,8 @@ const Worksheet = () => {
                                 size="sm"
                                 className="ml-1"
                                 name="view"
-                            //disabled={!state.selectedData}
+                                onClick={viewModal}
+                                disabled={rowSelected === undefined ? true : false}
 
                             >
                                 View
@@ -74,7 +130,8 @@ const Worksheet = () => {
                                 size="sm"
                                 className="ml-1"
                                 name="delete"
-                            //disabled={!state.selectedData}
+                                onClick={deleteModal}
+                                disabled={rowSelected === undefined ? true : false}
 
                             >
                                 Delete
@@ -85,7 +142,7 @@ const Worksheet = () => {
                         <Col>
                             <Table
                                 data={data}
-                                
+                                onSelect={__onSelect}
                             />
                         </Col>
                     </Row>
@@ -93,25 +150,34 @@ const Worksheet = () => {
                 </Card.Body>
             </Card>
 
+
+            {mode === "create" || mode === "edit" ? 
+
             <ModalFindings
 
-                data={data}
+                data={data && data.length > 0 ? rowSelected >= 0 ? data[`${rowSelected}`] : [] : []}
+                entityIdData={data && data.length > 0 ? rowSelected >= 0 ? data[`${rowSelected}`].entityId : [] : []}
                 show={showForm}
                 cancelModal={cancelModal}
+                saveModal={saveModal}
+                mode={mode}
+                rowSelected={rowSelected}
 
 
-            //selectedData={state.selectedData}
             />
 
+        : <ModalView 
+        data={data && data.length > 0 ? rowSelected >= 0 ? data[`${rowSelected}`] : [] : []}
+        entityIdData={data && data.length > 0 ? rowSelected >= 0 ? data[`${rowSelected}`].entityId : [] : []}
+        show={showForm}
+        cancelModal={cancelModal}
+        saveModal={saveModal}
+        mode={mode}
+        rowSelected={rowSelected}
+        deleteModal={deleteRow}
+        
+        />}
 
-            {/* <Form
-        show={state.showForm}
-        handleForm={handleForm}
-        submitForm={submitForm}
-        mode={state.mode}
-        selectedData={state.selectedData}
-        deleteData={deleteData}
-      /> */}
         </Container>
     )
 }

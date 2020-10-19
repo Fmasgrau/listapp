@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import '../../App.css';
 import showAnalyticalFindings from '../showAnalyticalFindings'
 import DescriptiveFindings from '../DescriptiveFindings/DescriptiveFindings';
@@ -12,7 +12,7 @@ import Color from '../Color/Color'
 import {Modal} from 'react-bootstrap';
 
 function ModalFindings({ show,
-  cancelModal}) {
+  cancelModal, saveModal, data, mode, entityIdData, rowSelected}) {
 
   const [descFindings, setDescFindings] = useState() //useState(dataJson.descriptiveFindings ? dataJson.descriptiveFindings : [])
   const [analyticFindings, setAnalyticFindings] = useState({})
@@ -22,7 +22,27 @@ function ModalFindings({ show,
   const [entityId, setEntityId] = useState()
   const [finalRisk, setFinalRisk] = useState()
   const [grandreMarks, setGrandreMarks] = useState()
+  const [dateFinding , setDateFinding] = useState()
+  const [editFinding, setEditFinding] = useState()
  
+
+  useEffect( () => {
+   
+    if(mode === "create"){
+      
+    }
+
+    else if(mode === "edit" ){
+      setDescFindings(data ? data.descriptiveFindings : [])
+      setEntityId(entityIdData ? entityIdData : "")
+      setEditFinding(data ? data.findingsId : "")
+      console.log("dataent",data)
+      
+    }
+
+    console.log("mode", mode)
+  }, [rowSelected, data, mode])
+
 
   const handleEntityId = (e) => {
     setEntityId(e)
@@ -54,11 +74,13 @@ function ModalFindings({ show,
       setGrandreMarks("")
     } else {
       entityRegister.map(res => {
+        console.log("Probandoproblem", res.key, entityId)
         if (res.key === entityId) {
           console.log("grandent", score)
           res.riskAssessment.map(res2 => {
             console.log("grandent2", res2)
             if (res2.riskRating === score) {
+              console.log("grandRes", res2.implications)
               setGrandreMarks(res2.implications)
             }
           })
@@ -84,18 +106,20 @@ function ModalFindings({ show,
     let freq = 0
     let tScore = 0
     let avg = 0
+    console.log("datosquep", datos)
     setAnalyticFindings(datos)
 
-    if (Object.keys(datos) < 1) {
+    if ((Object.keys(datos) < 1  && mode === "create") || mode === "create") {
       setFrequency(0)
       setTotalScore(0)
       setAvgScoring(0)
       finalRiskRating(0)
       __grandreMarks(0)
+      console.log("entro facu", datos)
     } else {
       console.log("keys", Object.keys(datos))
       Object.keys(datos).map((res, i) => {
-        console.log(datos[res]["frequency"])
+        //console.log(datos[res]["frequency"])
         freq = freq + datos[res]["frequency"]
         tScore = tScore + datos[res]["scoring"]
         avg = (tScore / freq).toFixed(2)
@@ -104,15 +128,17 @@ function ModalFindings({ show,
         setAvgScoring(avg)
         console.log("Probando", avg)
         finalRiskRating(avg)
+        console.log("Probando avg",__grandreMarks(finalRiskRating(avg)))
         __grandreMarks(finalRiskRating(avg))
 
         return true
       })
 
     }
-    console.log(Object.keys(datos))
+    console.log("ObjK",Object.keys(datos))
+    console.log("ObjKmode", mode)
 
-  }, [descFindings])
+  },[descFindings, rowSelected, mode])
 
 
 
@@ -123,6 +149,45 @@ function ModalFindings({ show,
   }
 
 
+  const handleDate = (e) =>{
+    //console.log(e)
+    setDateFinding(e)
+  }
+
+  const __saveModal = () => {
+
+    let listaAnalytical = []
+
+    let analytical = analyticFindings ? Object.keys(analyticFindings).map( (res,index) => {
+      //console.log("res",analyticFindings[res])
+      let objeto = analyticFindings[res]
+      listaAnalytical.push({
+            "riskClassification": res,
+              "frequency":objeto.frequency,
+              "totalscoring":objeto.scoring,
+              "findingsrating": objeto.riskrating,
+              "findingsRemarks": objeto.riskadvice
+            })
+    }) : listaAnalytical
+    
+    let findings = {
+      
+        "findingsId": dateFinding,
+        "entityId": entityId,
+        "descriptiveFindings": descFindings,
+        
+        "analyticalfindings": listaAnalytical,		  
+        "totalfrequency": frequency,
+        "grandtotalscoring":totalScore,
+        "averagescoring" : parseFloat(avgScoring),
+        "finalriskrating": finalRisk,     		 
+        "grandremarks": grandreMarks
+        
+    }
+
+    saveModal(findings)
+    //console.log("saveModal", findings)
+  }
 
 
 
@@ -142,7 +207,7 @@ function ModalFindings({ show,
             Findings
             </div>
             <div className="col-4 d-flex justify-content-end">
-              <button className="btn btn-sm btn-success">Save</button>
+              <button className="btn btn-sm btn-success" onClick={__saveModal}>Save</button>
               <button className="btn btn-sm btn-danger ml-2" onClick={() => cancelModal()}>Cancel</button>
             </div>
           </div>
@@ -157,8 +222,11 @@ function ModalFindings({ show,
             <div className="col-2 form-control bg-primary text-light mr-1">
               Finding ID:
         </div>
-            <div className="col-4 form-control" >
-              <FindingIdTime onChange={entityId} />
+            <div className="col-4 form-control">
+              
+            <FindingIdTime onChange={entityId} handleDate={handleDate} mode={mode} date={editFinding}/>
+              
+             
             </div>
           </div>
 
@@ -168,7 +236,7 @@ function ModalFindings({ show,
               Entity ID:
         </div>
             <div className="col-4 pl-1" >
-              <EntityId handleEntityId={handleEntityId} />
+              <EntityId handleEntityId={handleEntityId} mode={mode} entityId={entityIdData}/>
             </div>
           </div>
           {/* End of Entity Id */}
@@ -177,7 +245,7 @@ function ModalFindings({ show,
 
           <div style={{ border: '1px solid grey', borderRadius: '1%' }} className="p-3 mt-3">
 
-            <DescriptiveFindings entityId={entityId} handleFindings={handleFindings} />
+            <DescriptiveFindings entityId={entityId} handleFindings={handleFindings} data={mode !== "create" ? data.descriptiveFindings : descFindings} mode={mode} rowSelected={rowSelected}/>
 
           </div>
 
@@ -283,7 +351,7 @@ function ModalFindings({ show,
                 GrandreMarks
               </div>
               <div className="col-8" style={border.center}>
-                {grandreMarks}
+                { grandreMarks}
               </div>
             </div>
             {/* end GrandreMarks */}

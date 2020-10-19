@@ -7,7 +7,9 @@ import riskAssessment from '../Data/Dummy/ic4pro_RiskAssessment.json'
 
 
 
-export default function DescriptiveFindings({ entityId, handleFindings }) {
+export default function DescriptiveFindings({ entityId, handleFindings, data, mode, rowSelected }) {
+
+
   const { register, control, handleSubmit, reset, watch, setValue, getValues } = useForm({
 
   });
@@ -20,6 +22,9 @@ export default function DescriptiveFindings({ entityId, handleFindings }) {
   );
 
   const [item1, setItem] = useState()
+  const [item2, setItem2] = useState()
+  const [deleteValue, setDeleteValue] = useState(false)
+  const [long, setLong] =useState(0)
   const onSubmit = (data) => console.log("data", data);
 
   const dataJson = watch("descriptiveFindings", "")
@@ -27,16 +32,27 @@ export default function DescriptiveFindings({ entityId, handleFindings }) {
   useEffect(() => {
     handleFindings(dataJson)
   }, [fields])
+
   useEffect(() => {
     reset()
   }, [entityId])
+
+  
+
+  useEffect(() => {
+
+
+    
+   
+  }, )
 
 
 
   useEffect(() => {
     handleFindings(watch().descriptiveFindings)
-
+    //console.log(fields)
   }, [fields, item1])
+
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -70,6 +86,7 @@ export default function DescriptiveFindings({ entityId, handleFindings }) {
                   defaultValue={`${item.accountNo}`} // make sure to set up defaultValue
                   ref={register()}
                   className="custom-select mt-3">
+                    <option>Select</option>
                   {dataAccounts.map((res, index) => {
                     return (
                       <option key={index}>{res.accountNo}</option>
@@ -89,7 +106,7 @@ export default function DescriptiveFindings({ entityId, handleFindings }) {
                   onChange={
                     (e) => {
                       let riskI = 0
-                 
+
                       for (let i = 0; i < riskIndicators.length; i++) {
                         if (riskIndicators[i].key === e.target.value) {
                           //console.log("entro al if",riskIndicators[i].riskValue)
@@ -122,9 +139,12 @@ export default function DescriptiveFindings({ entityId, handleFindings }) {
                     }
                   }
                 >
-                  <option>Select...</option>
+                  {mode === "create" ? <option>Select</option> : ""}
+                  
+                  {/* <option>{fields ? fields[index].findings : ""}</option> */}
                   {
                     entityRegister.map(res => {
+                      console.log("probando entity", entityId)
                       if (res.key === entityId) {
                         return (
                           res.riskIndicator.map((res, index) => {
@@ -145,7 +165,7 @@ export default function DescriptiveFindings({ entityId, handleFindings }) {
                   as={<input />}
                   name={`descriptiveFindings[${index}].scoring`}
                   control={control}
-                  defaultValue={0}
+                  defaultValue={`${item.scoring}`}
                   className="form-control mt-3 text-center"
                   disabled// make sure to set up defaultValue
                 />
@@ -166,9 +186,11 @@ export default function DescriptiveFindings({ entityId, handleFindings }) {
                 <button type="button" onClick={() => {
 
                   remove(index)
+                  setLong(long-1)
                   //console.log(fields)
                   //setDeleteValue(!deleteValue)
                   //handleFindings(dataJson)
+                  //alert(long)
 
                 }} className="btn btn-sm btn-danger mt-3">
                   Delete

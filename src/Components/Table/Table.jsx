@@ -7,7 +7,7 @@ import riskCol from '../Data/Dummy/ic4pro_statusColors.json'
 import { Button } from 'react-bootstrap'
 import Modal from 'react-bootstrap/Modal'
 
-const Table = ({ data, selectedData, selectData }) => {
+const Table = ({ data, onSelect }) => {
 
 
   const [show, setShow] = useState(false);
@@ -21,6 +21,7 @@ const Table = ({ data, selectedData, selectData }) => {
 
   useEffect(() => {
     setInfo(data)
+    console.log("efecto", data)
   }, [data])
 
 
@@ -79,7 +80,7 @@ const Table = ({ data, selectedData, selectData }) => {
     // hideSelectColumn: !selectedData,
     onSelect: (row, isSelect, rowIndex, e) => {
       console.log(rowIndex, e)
-      //setShow(true)
+      onSelect(rowIndex)
     }
   };
 

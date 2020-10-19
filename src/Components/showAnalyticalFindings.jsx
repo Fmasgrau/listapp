@@ -1,9 +1,10 @@
 
 
-export default function showAnalyticalFindings(item = {}, riskAssessment = [], riskIndicator = []) {
+export default function showAnalyticalFindings(item = [], riskAssessment = [], riskIndicator = []) {
 
 
     //let lista = []
+    console.log("item", item)
     let lista = {}
     let scoring = ''
     let freq = 0
