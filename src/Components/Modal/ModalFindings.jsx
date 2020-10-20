@@ -30,7 +30,7 @@ function ModalFindings({ show,
     console.log("select modalfi", data)
     console.log("datosquep1", data)
     if (mode !== "create") {
-      setDescFindings(data.descriptiveFindings)
+     setDescFindings(data.descriptiveFindings)
       setEntityId(data.entityId)
       setEditFinding(data.findingsId)
       console.log("seteo", data.descriptiveFindings)
@@ -269,7 +269,7 @@ function ModalFindings({ show,
 
           <div style={{ border: '1px solid grey', borderRadius: '1%' }} className="p-3 mt-3">
 
-            <DescriptiveFindings entityId={entityId} handleFindings={handleFindings} data={data.descriptiveFindings} mode={mode} rowSelected={rowSelected} />
+            <DescriptiveFindings entityId={mode === "edit" ? entityIdData : entityId} handleFindings={handleFindings} data={data.descriptiveFindings} mode={mode} rowSelected={rowSelected} />
 
           </div>
 

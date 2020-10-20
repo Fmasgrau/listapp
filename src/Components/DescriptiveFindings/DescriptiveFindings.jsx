@@ -29,9 +29,9 @@ export default function DescriptiveFindings({ entityId, handleFindings, data, mo
   const dataJson = watch()
 
   useEffect(() => {
-    handleFindings(dataJson.descriptiveFindings)
-    console.log("handle", dataJson.descriptiveFindings)
-  }, [item1, mode, rowSelected, deleteValue, fields])
+    handleFindings(watch().descriptiveFindings)
+    console.log("handle", )
+  }, [item1, mode, rowSelected, deleteValue, long])
 
   useEffect(() => {
     reset()
@@ -41,10 +41,18 @@ export default function DescriptiveFindings({ entityId, handleFindings, data, mo
 
   useEffect(() => {
 
-    if (mode !== "create"){
+    if (mode === "edit"){
+      console.log("handle append",data)
     append(data)
   }
+
+ 
    
+  }, [data])
+
+  useEffect(() =>{
+    handleFindings(data)
+    console.log("handle u", data)
   }, [data])
 
 
@@ -203,6 +211,7 @@ export default function DescriptiveFindings({ entityId, handleFindings, data, mo
           type="button"
           onClick={() => {
             append({ accountNo: "", findings: "", scoring: "", riskrating: "" });
+            setLong(!long)
             //setDeleteValue(!deleteValue)
             //handleFindings(fields)
           }}
