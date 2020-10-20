@@ -35,6 +35,7 @@ function ModalFindings({ show,
       setEditFinding(data.findingsId)
       console.log("seteo", data.descriptiveFindings)
     }
+    
   }, [rowSelected])
 
 

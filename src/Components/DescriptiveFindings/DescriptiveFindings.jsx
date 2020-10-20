@@ -23,7 +23,7 @@ export default function DescriptiveFindings({ entityId, handleFindings, data, mo
 
   const [item1, setItem] = useState()
   const [deleteValue, setDeleteValue] = useState(false)
-  const [long, setLong] =useState(0)
+  const [long, setLong] = useState(0)
   const onSubmit = (data) => console.log("data", data);
 
   const dataJson = watch()
@@ -31,22 +31,22 @@ export default function DescriptiveFindings({ entityId, handleFindings, data, mo
   useEffect(() => {
     handleFindings(dataJson.descriptiveFindings)
     console.log("handle", dataJson.descriptiveFindings)
-  }, [item1, mode, rowSelected, deleteValue])
+  }, [item1, mode, rowSelected, deleteValue, fields])
 
   useEffect(() => {
     reset()
   }, [entityId])
 
-  
+
 
   useEffect(() => {
 
-    console.log("descfind", data)
-    if(mode !== "create"){
+    if (mode !== "create"){
     append(data)
   }
-  
+   
   }, [data])
+
 
 
 
@@ -83,7 +83,7 @@ export default function DescriptiveFindings({ entityId, handleFindings, data, mo
                   defaultValue={`${item.accountNo}`} // make sure to set up defaultValue
                   ref={register()}
                   className="custom-select mt-3">
-                    <option>Select</option>
+                  <option>Select</option>
                   {dataAccounts.map((res, index) => {
                     return (
                       <option key={index}>{res.accountNo}</option>
@@ -106,7 +106,7 @@ export default function DescriptiveFindings({ entityId, handleFindings, data, mo
 
                       for (let i = 0; i < riskIndicators.length; i++) {
                         if (riskIndicators[i].key === e.target.value) {
-                          console.log("entro al if",riskIndicators[i].riskValue)
+                          console.log("entro al if", riskIndicators[i].riskValue)
                           riskI = riskIndicators[i].riskValue
                           setValue(`descriptiveFindings[${index}].scoring`, riskI)
                           setItem(!item1)
@@ -137,7 +137,7 @@ export default function DescriptiveFindings({ entityId, handleFindings, data, mo
                   }
                 >
                   {mode === "create" ? <option>Select</option> : ""}
-                  
+
                   {/* <option>{fields ? fields[index].findings : ""}</option> */}
                   {
                     entityRegister.map(res => {
@@ -185,7 +185,7 @@ export default function DescriptiveFindings({ entityId, handleFindings, data, mo
                   remove(index)
                   //setLong(long-1)
                   //console.log(fields)
-                setDeleteValue(!deleteValue)
+                  setDeleteValue(!deleteValue)
                   //handleFindings(dataJson)
                   //alert(long)
 
@@ -202,7 +202,7 @@ export default function DescriptiveFindings({ entityId, handleFindings, data, mo
         <button
           type="button"
           onClick={() => {
-            append({accountNo: "", findings: "", scoring: "", riskrating: ""});
+            append({ accountNo: "", findings: "", scoring: "", riskrating: "" });
             //setDeleteValue(!deleteValue)
             //handleFindings(fields)
           }}
@@ -218,7 +218,7 @@ export default function DescriptiveFindings({ entityId, handleFindings, data, mo
 
       </section>
 
-      <input type="submit" />
+      {/* <input type="submit" /> */}
     </form>
   );
 }

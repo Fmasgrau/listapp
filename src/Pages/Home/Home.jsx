@@ -94,6 +94,7 @@ const Worksheet = () => {
         }
 
         setShowForm(false)
+        setMode("")
     }
         console.log("delete", e)
     }
@@ -141,8 +142,18 @@ const Worksheet = () => {
             )
         }
 
-        else{
-            return(<div></div>)
+        else if(mode === "edit"){
+            return(<ModalFindings 
+                data={data && data.length > 0 ? rowSelected >= 0 ? data[`${rowSelected}`] : [] : []}
+                entityIdData={data && data.length > 0 ? rowSelected >= 0 ? data[`${rowSelected}`].entityId : [] : []}
+                show={showForm}
+                cancelModal={cancelModal}
+                saveModal={saveModal}
+                mode={mode}
+                rowSelected={rowSelected}
+                deleteModal={deleteRow}
+                
+                />)
         }
 
     }
