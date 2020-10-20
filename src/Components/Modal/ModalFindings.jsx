@@ -9,10 +9,10 @@ import riskColour from '../Data/Dummy/ic4pro_statusColors.json'
 import riskIndicator from '../Data/Dummy/ic4pro_riskIndicators.json'
 import entityRegister from '../Data/Dummy/ic4pro_entityregister.json'
 import Color from '../Color/Color'
-import {Modal} from 'react-bootstrap';
+import { Modal } from 'react-bootstrap';
 
 function ModalFindings({ show,
-  cancelModal, saveModal, data, mode, entityIdData, rowSelected}) {
+  cancelModal, saveModal, data, mode, entityIdData, rowSelected }) {
 
   const [descFindings, setDescFindings] = useState() //useState(dataJson.descriptiveFindings ? dataJson.descriptiveFindings : [])
   const [analyticFindings, setAnalyticFindings] = useState({})
@@ -22,26 +22,20 @@ function ModalFindings({ show,
   const [entityId, setEntityId] = useState()
   const [finalRisk, setFinalRisk] = useState()
   const [grandreMarks, setGrandreMarks] = useState()
-  const [dateFinding , setDateFinding] = useState()
+  const [dateFinding, setDateFinding] = useState()
   const [editFinding, setEditFinding] = useState()
- 
 
-  useEffect( () => {
-   
-    if(mode === "create"){
-      
+
+  useEffect(() => {
+    console.log("select modalfi", data)
+    console.log("datosquep1", data)
+    if (mode !== "create") {
+      setDescFindings(data.descriptiveFindings)
+      setEntityId(data.entityId)
+      setEditFinding(data.findingsId)
+      console.log("seteo", data.descriptiveFindings)
     }
-
-    else if(mode === "edit" ){
-      setDescFindings(data ? data.descriptiveFindings : [])
-      setEntityId(entityIdData ? entityIdData : "")
-      setEditFinding(data ? data.findingsId : "")
-      console.log("dataent",data)
-      
-    }
-
-    console.log("mode", mode)
-  }, [rowSelected, data, mode])
+  }, [rowSelected])
 
 
   const handleEntityId = (e) => {
@@ -69,7 +63,7 @@ function ModalFindings({ show,
   const __grandreMarks = (score) => {
 
     console.log("grand", score)
-    if (score === '0' || score === undefined) {
+    if (score === '0' || score === undefined || score === 0) {
       console.log("entro aca?")
       setGrandreMarks("")
     } else {
@@ -98,7 +92,11 @@ function ModalFindings({ show,
       textAlign: 'center'
     }
   }
+  const handleFindings = (e) => {
+    //console.log("handleapp", e)
+    setDescFindings(e)
 
+  }
 
 
   useEffect(() => {
@@ -109,7 +107,7 @@ function ModalFindings({ show,
     console.log("datosquep", datos)
     setAnalyticFindings(datos)
 
-    if ((Object.keys(datos) < 1  && mode === "create") || mode === "create") {
+    if ((Object.keys(datos) < 1)) {
       setFrequency(0)
       setTotalScore(0)
       setAvgScoring(0)
@@ -128,28 +126,24 @@ function ModalFindings({ show,
         setAvgScoring(avg)
         console.log("Probando", avg)
         finalRiskRating(avg)
-        console.log("Probando avg",__grandreMarks(finalRiskRating(avg)))
+        console.log("Probando avg", __grandreMarks(finalRiskRating(avg)))
         __grandreMarks(finalRiskRating(avg))
 
         return true
       })
 
     }
-    console.log("ObjK",Object.keys(datos))
+    console.log("ObjK", Object.keys(datos))
     console.log("ObjKmode", mode)
 
-  },[descFindings, rowSelected, mode])
+  }, [rowSelected, mode, descFindings])
 
 
 
-  const handleFindings = (e) => {
-    //console.log("handleapp", e)
-    setDescFindings(e)
-
-  }
 
 
-  const handleDate = (e) =>{
+
+  const handleDate = (e) => {
     //console.log(e)
     setDateFinding(e)
   }
@@ -158,37 +152,66 @@ function ModalFindings({ show,
 
     let listaAnalytical = []
 
-    let analytical = analyticFindings ? Object.keys(analyticFindings).map( (res,index) => {
+    let analytical = analyticFindings ? Object.keys(analyticFindings).map((res, index) => {
       //console.log("res",analyticFindings[res])
       let objeto = analyticFindings[res]
       listaAnalytical.push({
-            "riskClassification": res,
-              "frequency":objeto.frequency,
-              "totalscoring":objeto.scoring,
-              "findingsrating": objeto.riskrating,
-              "findingsRemarks": objeto.riskadvice
-            })
+        "riskClassification": res,
+        "frequency": objeto.frequency,
+        "totalscoring": objeto.scoring,
+        "findingsrating": objeto.riskrating,
+        "findingsRemarks": objeto.riskadvice
+      })
     }) : listaAnalytical
-    
+
     let findings = {
-      
-        "findingsId": dateFinding,
-        "entityId": entityId,
-        "descriptiveFindings": descFindings,
-        
-        "analyticalfindings": listaAnalytical,		  
-        "totalfrequency": frequency,
-        "grandtotalscoring":totalScore,
-        "averagescoring" : parseFloat(avgScoring),
-        "finalriskrating": finalRisk,     		 
-        "grandremarks": grandreMarks
-        
+
+      "findingsId": dateFinding,
+      "entityId": entityId,
+      "descriptiveFindings": descFindings,
+
+      "analyticalfindings": listaAnalytical,
+      "totalfrequency": frequency,
+      "grandtotalscoring": totalScore,
+      "averagescoring": parseFloat(avgScoring),
+      "finalriskrating": finalRisk,
+      "grandremarks": grandreMarks
+
     }
 
+    
     saveModal(findings)
-    //console.log("saveModal", findings)
+    //console.log("handleSave", findings)
   }
 
+  const __showAnalytical = () => {
+
+    //console.log("objectkeys", Object.keys(analyticFindings).length)
+    let lista = []
+    
+    
+
+    Object.keys(analyticFindings).map((res, i) => {
+
+      
+      
+      lista.push(
+        <tr key={i}>
+          <td>{res}</td>
+          <td>{analyticFindings[res]["frequency"]}</td>
+          <td>{analyticFindings[res]["scoring"]}</td>
+          <td className="" ><span className="pl-2 pr-2 pt-1 pb-1" style={{
+            background: `#${Color(analyticFindings[res]["riskrating"], riskAssesment, riskColour).color}`, borderRadius: '5%',
+            color: `${Color(analyticFindings[res]["riskrating"], riskAssesment, riskColour).fontColor}`
+          }}>{analyticFindings[res]["riskrating"]}</span></td>
+          <td>{analyticFindings[res]["riskadvice"]}</td>
+        </tr>)
+
+      
+    })
+  
+    return lista
+  }
 
 
 
@@ -198,13 +221,13 @@ function ModalFindings({ show,
       backdrop="static"
       keyboard={false}
       size="xl"
-      
+
     >
       <Modal.Header>
         <div className="container">
           <div className="row">
             <div className="col-8">
-            Findings
+              Findings
             </div>
             <div className="col-4 d-flex justify-content-end">
               <button className="btn btn-sm btn-success" onClick={__saveModal}>Save</button>
@@ -212,10 +235,10 @@ function ModalFindings({ show,
             </div>
           </div>
         </div>
-          
-            
-          
-        </Modal.Header>
+
+
+
+      </Modal.Header>
       <Modal.Body>
         <div className="container">
           <div className="row mt-3">
@@ -223,10 +246,10 @@ function ModalFindings({ show,
               Finding ID:
         </div>
             <div className="col-4 form-control">
-              
-            <FindingIdTime onChange={entityId} handleDate={handleDate} mode={mode} date={editFinding}/>
-              
-             
+
+              <FindingIdTime onChange={entityId} handleDate={handleDate} mode={mode} date={editFinding} />
+
+
             </div>
           </div>
 
@@ -236,7 +259,7 @@ function ModalFindings({ show,
               Entity ID:
         </div>
             <div className="col-4 pl-1" >
-              <EntityId handleEntityId={handleEntityId} mode={mode} entityId={entityIdData}/>
+              <EntityId handleEntityId={handleEntityId} mode={mode} entityId={entityIdData} />
             </div>
           </div>
           {/* End of Entity Id */}
@@ -245,7 +268,7 @@ function ModalFindings({ show,
 
           <div style={{ border: '1px solid grey', borderRadius: '1%' }} className="p-3 mt-3">
 
-            <DescriptiveFindings entityId={entityId} handleFindings={handleFindings} data={mode !== "create" ? data.descriptiveFindings : descFindings} mode={mode} rowSelected={rowSelected}/>
+            <DescriptiveFindings entityId={entityId} handleFindings={handleFindings} data={data.descriptiveFindings} mode={mode} rowSelected={rowSelected} />
 
           </div>
 
@@ -273,24 +296,8 @@ function ModalFindings({ show,
                   <tbody>
 
                     {
-
-                      Object.keys(analyticFindings).map((res, i) => {
-
-
-                        return (
-                          <tr key={i}>
-                            <td>{res}</td>
-                            <td>{analyticFindings[res]["frequency"]}</td>
-                            <td>{analyticFindings[res]["scoring"]}</td>
-                            <td className="" ><span className="pl-2 pr-2 pt-1 pb-1" style={{
-                              background: `#${Color(analyticFindings[res]["riskrating"], riskAssesment, riskColour).color}`, borderRadius: '5%',
-                              color: `${Color(analyticFindings[res]["riskrating"], riskAssesment, riskColour).fontColor}`
-                            }}>{analyticFindings[res]["riskrating"]}</span></td>
-                            <td>{analyticFindings[res]["riskadvice"]}</td>
-                          </tr>
-
-                        )
-                      })
+                     
+                     __showAnalytical()
                     }
 
                   </tbody>
@@ -351,7 +358,7 @@ function ModalFindings({ show,
                 GrandreMarks
               </div>
               <div className="col-8" style={border.center}>
-                { grandreMarks}
+                {grandreMarks}
               </div>
             </div>
             {/* end GrandreMarks */}

@@ -38,9 +38,32 @@ const Worksheet = () => {
     }
 
     const saveModal = (e) => {
-        //console.log("saveModaldesdeHome", e)
+        console.log("saveModaldesdeHome", e)
+
+        let lista = []
+
         setShowForm(false)
+        if(mode === "create"){
         setData([...data, e])
+    }
+    else{
+        
+        data.map((res, index) => {
+           // console.log("undef",datos)
+            if ( res.findingsId === e.findingsId){
+                console.log("puso e", e)
+                lista.push(e)
+            } else{
+                lista.push(res)
+            }
+
+           
+        }
+        
+        )
+        
+        setData(lista)
+    }
     }
 
     const viewModal = () => {
@@ -81,7 +104,47 @@ const Worksheet = () => {
 
     const __onSelect = (e) => {
         setRowSelected(e)
-        //console.log("select data", e)
+        console.log("select data", e)
+    }
+
+
+    const showModal = () => {
+        
+        if(mode === "view" || mode === "delete"){
+           return( <ModalView 
+        data={data && data.length > 0 ? rowSelected >= 0 ? data[`${rowSelected}`] : [] : []}
+        entityIdData={data && data.length > 0 ? rowSelected >= 0 ? data[`${rowSelected}`].entityId : [] : []}
+        show={showForm}
+        cancelModal={cancelModal}
+        saveModal={saveModal}
+        mode={mode}
+        rowSelected={rowSelected}
+        deleteModal={deleteRow}
+        
+        />)
+        }
+        else if(mode === "create") {
+            console.log("select modal",rowSelected)
+            return(
+                <ModalFindings
+
+                data={[]}
+                entityIdData={[]}
+                show={showForm}
+                cancelModal={cancelModal}
+                saveModal={saveModal}
+                mode={mode}
+                rowSelected={rowSelected}
+
+
+            />
+            )
+        }
+
+        else{
+            return(<div></div>)
+        }
+
     }
 
     return (
@@ -151,32 +214,7 @@ const Worksheet = () => {
             </Card>
 
 
-            {mode === "create" || mode === "edit" ? 
-
-            <ModalFindings
-
-                data={data && data.length > 0 ? rowSelected >= 0 ? data[`${rowSelected}`] : [] : []}
-                entityIdData={data && data.length > 0 ? rowSelected >= 0 ? data[`${rowSelected}`].entityId : [] : []}
-                show={showForm}
-                cancelModal={cancelModal}
-                saveModal={saveModal}
-                mode={mode}
-                rowSelected={rowSelected}
-
-
-            />
-
-        : <ModalView 
-        data={data && data.length > 0 ? rowSelected >= 0 ? data[`${rowSelected}`] : [] : []}
-        entityIdData={data && data.length > 0 ? rowSelected >= 0 ? data[`${rowSelected}`].entityId : [] : []}
-        show={showForm}
-        cancelModal={cancelModal}
-        saveModal={saveModal}
-        mode={mode}
-        rowSelected={rowSelected}
-        deleteModal={deleteRow}
-        
-        />}
+           {showModal()}
 
         </Container>
     )

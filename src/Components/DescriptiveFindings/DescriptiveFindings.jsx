@@ -22,16 +22,16 @@ export default function DescriptiveFindings({ entityId, handleFindings, data, mo
   );
 
   const [item1, setItem] = useState()
-  const [item2, setItem2] = useState()
   const [deleteValue, setDeleteValue] = useState(false)
   const [long, setLong] =useState(0)
   const onSubmit = (data) => console.log("data", data);
 
-  const dataJson = watch("descriptiveFindings", "")
+  const dataJson = watch()
 
   useEffect(() => {
-    handleFindings(dataJson)
-  }, [fields])
+    handleFindings(dataJson.descriptiveFindings)
+    console.log("handle", dataJson.descriptiveFindings)
+  }, [item1, mode, rowSelected, deleteValue])
 
   useEffect(() => {
     reset()
@@ -41,17 +41,14 @@ export default function DescriptiveFindings({ entityId, handleFindings, data, mo
 
   useEffect(() => {
 
+    console.log("descfind", data)
+    if(mode !== "create"){
+    append(data)
+  }
+  
+  }, [data])
 
-    
-   
-  }, )
 
-
-
-  useEffect(() => {
-    handleFindings(watch().descriptiveFindings)
-    //console.log(fields)
-  }, [fields, item1])
 
 
   return (
@@ -109,7 +106,7 @@ export default function DescriptiveFindings({ entityId, handleFindings, data, mo
 
                       for (let i = 0; i < riskIndicators.length; i++) {
                         if (riskIndicators[i].key === e.target.value) {
-                          //console.log("entro al if",riskIndicators[i].riskValue)
+                          console.log("entro al if",riskIndicators[i].riskValue)
                           riskI = riskIndicators[i].riskValue
                           setValue(`descriptiveFindings[${index}].scoring`, riskI)
                           setItem(!item1)
@@ -117,7 +114,7 @@ export default function DescriptiveFindings({ entityId, handleFindings, data, mo
                         } else {
                           setValue(`descriptiveFindings[${index}].scoring`, 0)
                           setItem(!item1)
-                          //console.log("no entiendo porque", riskI)
+                          console.log("entro al if no entiendo porque", riskI)
                         }
                       }
 
@@ -186,9 +183,9 @@ export default function DescriptiveFindings({ entityId, handleFindings, data, mo
                 <button type="button" onClick={() => {
 
                   remove(index)
-                  setLong(long-1)
+                  //setLong(long-1)
                   //console.log(fields)
-                  //setDeleteValue(!deleteValue)
+                setDeleteValue(!deleteValue)
                   //handleFindings(dataJson)
                   //alert(long)
 
@@ -205,7 +202,7 @@ export default function DescriptiveFindings({ entityId, handleFindings, data, mo
         <button
           type="button"
           onClick={() => {
-            append();
+            append({accountNo: "", findings: "", scoring: "", riskrating: ""});
             //setDeleteValue(!deleteValue)
             //handleFindings(fields)
           }}
@@ -221,7 +218,7 @@ export default function DescriptiveFindings({ entityId, handleFindings, data, mo
 
       </section>
 
-      {/* <input type="submit" /> */}
+      <input type="submit" />
     </form>
   );
 }
