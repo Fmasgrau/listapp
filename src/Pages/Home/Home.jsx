@@ -32,6 +32,7 @@ const Worksheet = () => {
     }
 
     const editModal = () => {
+        console.log("editmodal", rowSelected)
         setShowForm(true)
         setMode("edit")
         

@@ -102,22 +102,19 @@ function ModalView({ show,
                                         data.descriptiveFindings.map((item, index) => {
                                             return (<React.Fragment key={item.id} >
 
-                                                <div className="col-3">
-                                                    <select
-                                                        className="custom-select mt-3">
-                                                        <option>{item.accountNo}</option>
+                                                <div className="col-3 mt-3">
+                                                 
+                                                        
+                                                        <input className="form-control text-center" value={item.accountNo} disabled/>
 
-                                                    </select>
                                                 </div>
-                                                <div className="col-3">
+                                                <div className="col-3 mt-3">
 
 
-                                                    <select className="custom-select mt-3">
+                                                   
 
-
-                                                        <option>{item.findings}</option>
-
-                                                    </select>
+                                                    <input className="form-control text-center" value={item.findings} disabled/>
+                                           
                                                 </div>
 
 

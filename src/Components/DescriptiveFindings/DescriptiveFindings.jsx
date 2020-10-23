@@ -31,9 +31,10 @@ export default function DescriptiveFindings({ entityId, handleFindings, data, mo
   useEffect(() => {
     handleFindings(watch().descriptiveFindings)
     console.log("handle", )
-  }, [item1, mode, rowSelected, deleteValue, long])
+  }, [item1, mode, rowSelected, deleteValue, long, reset])
 
   useEffect(() => {
+    
     reset()
   }, [entityId])
 
@@ -144,7 +145,7 @@ export default function DescriptiveFindings({ entityId, handleFindings, data, mo
                     }
                   }
                 >
-                  {mode === "create" ? <option>Select</option> : ""}
+                  {mode === "create" || mode === "edit" ? <option>Select</option> : ""}
 
                   {/* <option>{fields ? fields[index].findings : ""}</option> */}
                   {
@@ -210,7 +211,7 @@ export default function DescriptiveFindings({ entityId, handleFindings, data, mo
         <button
           type="button"
           onClick={() => {
-            append({ accountNo: "", findings: "", scoring: "", riskrating: "" });
+            append({ accountNo: "", findings: "", scoring: 0, riskrating: "" });
             setLong(!long)
             //setDeleteValue(!deleteValue)
             //handleFindings(fields)

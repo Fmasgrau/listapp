@@ -21,7 +21,7 @@ export default function FindingIdTime(props) {
 
     }, [])
 
-    const dateFinding = props.mode !== "create" ? props.date : `${año}${("0"+mes).slice(-2)}${("0"+dia).slice(-2)}:-:${("0"+hora).slice(-2)}${("0"+min).slice(-2)}${("0"+seg).slice(-2)}`
+    const dateFinding = props.mode !== "create" ? props.date : `${año}${("0"+mes).slice(-2)}${("0"+dia).slice(-2)}-${("0"+hora).slice(-2)}${("0"+min).slice(-2)}${("0"+seg).slice(-2)}`
 
     useEffect(() =>{
         props.handleDate(dateFinding)
@@ -37,7 +37,7 @@ export default function FindingIdTime(props) {
     return (
         <React.Fragment>
             
-            <p>{año}{("0"+mes).slice(-2)}{("0"+dia).slice(-2)}:-:{("0"+hora).slice(-2)}{("0"+min).slice(-2)}{("0"+seg).slice(-2)}</p>
+            <p>{año}{("0"+mes).slice(-2)}{("0"+dia).slice(-2)}-{("0"+hora).slice(-2)}{("0"+min).slice(-2)}{("0"+seg).slice(-2)}</p>
         </React.Fragment>
     )
 }

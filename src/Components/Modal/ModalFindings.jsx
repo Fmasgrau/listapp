@@ -19,11 +19,12 @@ function ModalFindings({ show,
   const [frequency, setFrequency] = useState(1)
   const [totalScore, setTotalScore] = useState(0)
   const [avgScoring, setAvgScoring] = useState(0)
-  const [entityId, setEntityId] = useState()
+  const [entityId, setEntityId] = useState(entityIdData)
   const [finalRisk, setFinalRisk] = useState()
   const [grandreMarks, setGrandreMarks] = useState()
   const [dateFinding, setDateFinding] = useState()
   const [editFinding, setEditFinding] = useState()
+  const [editEntity, setEditEntity] = useState(entityIdData)
 
 
   useEffect(() => {
@@ -33,14 +34,27 @@ function ModalFindings({ show,
      setDescFindings(data.descriptiveFindings)
       setEntityId(data.entityId)
       setEditFinding(data.findingsId)
-      console.log("seteo", data.descriptiveFindings)
+      setEditEntity(entityIdData)
+      console.log("seteo", data.entityId)
     }
     
-  }, [rowSelected])
+  }, [rowSelected, cancelModal, saveModal])
 
 
   const handleEntityId = (e) => {
+    setDescFindings([])
+    console.log("raro",e)
+    
+    if(mode === "create"){
+      console.log("editmodecreate",e)
     setEntityId(e)
+  }
+  else if(mode === "edit"){
+    console.log("editmode",e)
+    
+    setEditEntity(e)
+  }
+  console.log("entityId",entityIdData)
   }
 
   const finalRiskRating = (score) => {
@@ -94,7 +108,7 @@ function ModalFindings({ show,
     }
   }
   const handleFindings = (e) => {
-    //console.log("handleapp", e)
+    
     setDescFindings(e)
 
   }
@@ -137,7 +151,7 @@ function ModalFindings({ show,
     console.log("ObjK", Object.keys(datos))
     console.log("ObjKmode", mode)
 
-  }, [rowSelected, mode, descFindings])
+  }, [rowSelected, mode, descFindings, entityId])
 
 
 
@@ -168,7 +182,7 @@ function ModalFindings({ show,
     let findings = {
 
       "findingsId": dateFinding,
-      "entityId": entityId,
+      "entityId": mode === "edit" ? editEntity : entityId,
       "descriptiveFindings": descFindings,
 
       "analyticalfindings": listaAnalytical,
@@ -180,8 +194,31 @@ function ModalFindings({ show,
 
     }
 
+    let count = 0
+    descFindings ? descFindings.map( res => {
+      
+      if(res.accountNo === "Select" || res.accountNo === undefined){
+        alert("Please complete the account N°")
+        count = count + 1
+      }
+
+      if(res.findings === "Select" || res.findings === undefined){
+        alert("Please complete the Findings°")
+        count = count + 1
+      }
+
     
-    saveModal(findings)
+      console.log("handleSave1",res)
+    }) : alert("Please add a Finding")
+
+
+    if (count === 0 && descFindings.length > 0){
+      console.log("descfind", descFindings)
+      saveModal(findings)
+    }else{
+      alert("Please add Findings")
+    }
+    //saveModal(findings)
     //console.log("handleSave", findings)
   }
 
@@ -269,7 +306,7 @@ function ModalFindings({ show,
 
           <div style={{ border: '1px solid grey', borderRadius: '1%' }} className="p-3 mt-3">
 
-            <DescriptiveFindings entityId={mode === "edit" ? entityIdData : entityId} handleFindings={handleFindings} data={data.descriptiveFindings} mode={mode} rowSelected={rowSelected} />
+            <DescriptiveFindings entityId={mode === "edit" ? editEntity : entityId} handleFindings={handleFindings} data={data.descriptiveFindings} mode={mode} rowSelected={rowSelected} />
 
           </div>
 
