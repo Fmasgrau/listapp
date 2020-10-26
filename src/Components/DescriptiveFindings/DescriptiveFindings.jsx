@@ -91,6 +91,9 @@ export default function DescriptiveFindings({ entityId, handleFindings, data, mo
                 <select name={`descriptiveFindings[${index}].accountNo`}
                   defaultValue={`${item.accountNo}`} // make sure to set up defaultValue
                   ref={register()}
+                  onChange={() => {
+                    setItem(!item1)
+                  }}
                   className="custom-select mt-3">
                   <option>Select</option>
                   {dataAccounts.map((res, index) => {

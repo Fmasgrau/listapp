@@ -46,6 +46,7 @@ const Worksheet = () => {
         setShowForm(false)
         if(mode === "create"){
         setData([...data, e])
+        setMode("")
     }
     else{
         

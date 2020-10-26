@@ -30,7 +30,7 @@ function ModalFindings({ show,
   useEffect(() => {
     console.log("select modalfi", data)
     console.log("datosquep1", data)
-    if (mode !== "create") {
+    if (mode !== "create1") {
      setDescFindings(data.descriptiveFindings)
       setEntityId(data.entityId)
       setEditFinding(data.findingsId)
@@ -211,13 +211,14 @@ function ModalFindings({ show,
       console.log("handleSave1",res)
     }) : alert("Please add a Finding")
 
-
+if(descFindings){
     if (count === 0 && descFindings.length > 0){
       console.log("descfind", descFindings)
       saveModal(findings)
     }else{
       alert("Please add Findings")
     }
+  }
     //saveModal(findings)
     //console.log("handleSave", findings)
   }

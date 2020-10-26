@@ -36,7 +36,7 @@ function ModalView({ show,
                             Findings
             </div>
                         <div className="col-4 d-flex justify-content-end">
-                            <button className="btn btn-sm btn-success" disabled>Save</button>
+                            {/* <button className="btn btn-sm btn-success" disabled>Save</button> */}
                             <button className="btn btn-sm btn-danger ml-2" onClick={() => cancelModal()}>Cancel</button>
                             <button className={mode === "delete"  ? "btn btn-sm btn-danger ml-2" : "d-none"} onClick={() => deleteModal(deleteRow())}>Delete</button>
                         </div>
@@ -130,11 +130,7 @@ function ModalView({ show,
 
                                                 </div>
 
-                                                <div className="col-2">
-                                                    <button type="button" className="btn btn-sm btn-danger mt-3" disabled>
-                                                        Delete
-          </button>
-                                                </div>
+                                               
                                             </React.Fragment>)
                                         })
                                         : []}
@@ -142,13 +138,7 @@ function ModalView({ show,
                             </div>
 
                             <section>
-                                <button
-                                    type="button"
-                                    className="btn btn-sm btn-primary mt-3"
-                                    disabled
-                                >
-                                    Add Account
-        </button>
+                               
 
 
 
